@@ -143,6 +143,28 @@ public:
 	void reset() {
 		this->next = this->list;
 	}
+
+	// operator overloads
+	bool operator > (int num) {
+		return this->size > num;
+	}
+
+	bool operator >= (int num) {
+		return this->size >= num;
+	}
+
+	bool operator < (int num) {
+		return this->size < num;
+	}
+
+	bool operator <= (int num) {
+		return this->size <= num;
+	}
+
+	bool operator == (int num) {
+		return this->size == num;
+	}
+
 };
 
 #endif
