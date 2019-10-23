@@ -33,8 +33,8 @@ public:
 	}
 
 	~LinkedList() {
-		Node* curr = this->list;
-		Node* temp = nullptr;
+		Node<T>* curr = this->list;
+		Node<T>* temp = nullptr;
 
 		while (curr){
 			temp = curr->next;
@@ -53,7 +53,7 @@ public:
 			this->length--;
 
 			this->list = curr->next;
-			T result = curr->data;
+			T* result = curr->data;
 			delete curr;
 			return result;
 		}
@@ -63,7 +63,7 @@ public:
 				this->length--;
 
 				prev->next = curr->next;
-				T result = curr->data;
+				T* result = curr->data;
 				delete curr;
 				return result;
 			}
@@ -96,12 +96,13 @@ public:
 	}
 
 	void addItem(T* data) {
-		this->size++;
+		this->length++;
 		Node<T>* curr = this->list;
-		Node<T>* newNode = new Node{data, nullptr};
+		Node<T>* newNode = new Node<T>{data, nullptr};
 
 		if (!curr) {
 			this->list = newNode;
+			this->next = list;
 			return;
 		}
 
@@ -122,13 +123,15 @@ public:
 
 		T* result = this->next->data;
 		this->next = this->next->next;
+		
+		return result;
 	}
 
 	// assuming the list is zero-based
 	T* seeAt(int i){
-		Node<Node>* curr = this->list;
+		Node<T>* curr = this->list;
 
-		if (i >= this->size) {
+		if (i >= this->length) {
 			throw OutOfListRange();
 		}
 
@@ -146,23 +149,23 @@ public:
 
 	// operator overloads
 	bool operator > (int num) {
-		return this->size > num;
+		return this->length > num;
 	}
 
 	bool operator >= (int num) {
-		return this->size >= num;
+		return this->length >= num;
 	}
 
 	bool operator < (int num) {
-		return this->size < num;
+		return this->length < num;
 	}
 
 	bool operator <= (int num) {
-		return this->size <= num;
+		return this->length <= num;
 	}
 
 	bool operator == (int num) {
-		return this->size == num;
+		return this->length == num;
 	}
 
 };

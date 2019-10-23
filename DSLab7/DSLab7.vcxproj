@@ -124,6 +124,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="EmptyList.h" />
+    <ClInclude Include="Part.h" />
     <ClInclude Include="OutOfListRange.h" />
     <ClInclude Include="LinkedList.h" />
   </ItemGroup>
