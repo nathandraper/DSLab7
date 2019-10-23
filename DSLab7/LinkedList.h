@@ -45,8 +45,8 @@ public:
 	}
 
 	T* getItem(T* find) {
-		Node<Node>* curr = this->list;
-		Node<Node>* prev = this->list;
+		Node<T>* curr = this->list;
+		Node<T>* prev = this->list;
 
 		// in case the very first node contains desired data, we need to reset the class list head
 		if (this->list && *this->list->data == *find) {
@@ -59,7 +59,7 @@ public:
 		}
 
 		while (curr) {
-			if (*curr.data == *find) {
+			if (*curr->data == *find) {
 				this->length--;
 
 				prev->next = curr->next;
