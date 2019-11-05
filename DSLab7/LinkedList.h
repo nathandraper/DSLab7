@@ -12,8 +12,8 @@ string HEADER_FILENAME = "part_list_art.txt";
 
 template <typename T>
 struct Node {
-	T* data;
-	Node<T>* next;
+	T* data = nullptr;
+	Node<T>* next = nullptr;
 };
 
 // holds the floor layout in a singly-linked linked list structure
@@ -50,12 +50,12 @@ public:
 		}
 	}
 
-	T* getItem(T* find) {
+	T* getItem(int num) {
 		Node<T>* curr = this->list;
 		Node<T>* prev = this->list;
 
 		// in case the very first node contains desired data, we need to reset the class list head
-		if (this->list && *this->list->data == *find) {
+		if (this->list && this->list->data->getNumber() == num) {
 			this->length--;
 
 			this->list = curr->next;
@@ -65,7 +65,7 @@ public:
 		}
 
 		while (curr) {
-			if (*curr->data == *find) {
+			if (curr->data->getNumber() == num) {
 				this->length--;
 
 				prev->next = curr->next;
@@ -80,11 +80,11 @@ public:
 		return nullptr;
 	}
 
-	bool isInList(T* find) {
+	bool isInList(int num) {
 		Node<T>* prev = this->list;
 		Node<T>* curr = this->list;
 		while (curr) {
-			if (*curr->data == *find) {
+			if (curr->data->getNumber() == num) {
 				return true;
 			}
 			prev = curr;
@@ -143,7 +143,7 @@ public:
 
 		while (i > 0) {
 			curr = curr->next;
-			this->next = curr;
+			this->next = curr->next;
 			i--;
 		}
 		return curr->data;

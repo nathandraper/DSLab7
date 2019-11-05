@@ -14,7 +14,7 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="ASCII">
-      <UniqueIdentifier>{c68f7ca0-5637-49da-8ed7-84bf87c03139}</UniqueIdentifier>
+      <UniqueIdentifier>{b849b9c5-9e63-4c10-9068-57ba20bcb1ad}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

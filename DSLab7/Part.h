@@ -65,6 +65,12 @@ public:
 		return s;
 
 	}
+	
+	int getNumber() {
+
+		return this->partNumber;
+
+	}
 
 	double getPrice() {
 

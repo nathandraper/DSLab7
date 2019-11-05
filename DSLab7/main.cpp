@@ -2,6 +2,7 @@
 #include "LinkedList.h"
 #include "Part.h"
 #include "OutOfListRange.h"
+#include "EmptyList.h"
 
 using namespace std;
 
@@ -22,12 +23,11 @@ int getInt() {
 }
 
 int main() {
+	cout << "Welcome to the part program. View in fullscreen to appreciate the beautiful ASCII art." << endl;
 	int n;
 	int index;
 	int prodNum;
-	bool choice;
 	Part* item;
-	Part* dummy;
 	LinkedList<Part> list = LinkedList<Part>();
 
 	double price;
@@ -38,8 +38,8 @@ int main() {
 	char run = 'y';
 
 	while (run == 'y') {
-		cout << "Which function would you like to test?\n" << endl;
-		cout << " 1) AddItem\n 2) GetItem\n 3) IsInList\n 4) IsEmpty\n 5) Size\n 6) SeeNext\n 7) SeeAt\n 8) Reset\n 9) End\n " << endl;
+		cout << "What would you like to do?\n" << endl;
+		cout << " 1) AddItem\n 2) GetItem\n 3) IsInList\n 4) IsEmpty\n 5) Size\n 6) SeeNext\n 7) SeeAt\n 8) Reset\n 9) Display full list\n 10) End\n " << endl;
 		cin >> n;
 
 		switch (n) {
@@ -65,35 +65,37 @@ int main() {
 
 		case 2:
 			cout << "What item number would you like to get and remove?" << endl;
-			cin >> prodNum;
-			dummy = new Part(prodNum);
-			item = list.getItem(dummy);
-			cout << "This item was removed: " << endl;
-			cout << item->getPartInfo() << endl;
+			prodNum = getInt();
+			item = list.getItem(prodNum);
+
+			if (item) {
+				cout << "This item was removed: " << endl;
+				cout << item->getPartInfo() << endl;
+			}
+			else {
+				cout << "No such item is in the list." << endl;
+			}
+
 			delete item;
-			delete dummy;
 			break;
 
 		case 3:
 			cout << "What item number would you like to check?" << endl;
-			cin >> prodNum;
-			dummy = new Part(prodNum);
-			if (list.isInList(dummy)) {
+			prodNum = getInt();
+			if (list.isInList(prodNum)) {
 				cout << "the item is in the list." << endl;
 			}
 			else {
 				cout << "there is no such item in the list." << endl;
 			}
-			delete dummy;
 			break;
 
 		case 4: // executes isEmpty function
-			cout << "Is empty status: ";
 			if (list.isEmpty()) {
-				cout << "empty";
+				cout << "The list is empty.";
 			}
 			else {
-				cout << "not empty";
+				cout << "The list is not empty.";
 			}
 			cout << endl;
 			break;
@@ -103,13 +105,22 @@ int main() {
 			break;
 
 		case 6: // executes seeNext function
-			item = list.seeNext();
+			try {
+				item = list.seeNext();
+			}
+			catch (EmptyList e) {
+				cout << "Error: the list is empty." << endl;
+				cout << e.what() << endl;
+				break;
+			}
+
 			if (item != nullptr) {
 				item->display();
 			}
 			else {
 				cout << "There are no more items in the list." << endl;
 			}
+
 			break;
 
 		case 7:
@@ -131,12 +142,15 @@ int main() {
 			break;
 
 		case 9:
+			list.display();
+			break;
+
+		case 10:
 			run = 'n';
 			continue;
 		}
+
 		cout << "Continue? y/n" << endl;
 		cin >> run;
 	}
-
-	list.display();
 }
