@@ -1,6 +1,7 @@
 #include <iostream>
 #include "LinkedList.h"
 #include "Part.h"
+#include "OutOfListRange.h"
 
 using namespace std;
 
@@ -102,23 +103,26 @@ int main() {
 			break;
 
 		case 6: // executes seeNext function
-			choice = 1;
-			while (choice == 1) {
-				Part* node = list.seeNext();
-				if(node != nullptr)
-					cout << node->getPartInfo() << endl;
-				else {
-					cout << "The next node does not exist" << endl;
-				}
-				cout << "Would you like to continue to the next node? " << endl;
-				choice = getInt();
+			item = list.seeNext();
+			if (item != nullptr) {
+				item->display();
+			}
+			else {
+				cout << "There are no more items in the list." << endl;
 			}
 			break;
 
 		case 7:
 			cout << "What list position would you like to view? (first position = 0)" << endl;
-			cin >> index;
-			list.seeAt(index);
+
+			index = getInt();
+			try {
+				list.seeAt(index)->display();
+			}
+			catch (OutOfListRange e) {
+				cout << "Error: item does not exist. (remember the list is zero indexed.)" << endl;
+				cout << e.what() << endl;
+			}
 			break;
 
 		case 8:
@@ -127,9 +131,12 @@ int main() {
 			break;
 
 		case 9:
-			return 0; //executes destructors
+			run = 'n';
+			continue;
 		}
 		cout << "Continue? y/n" << endl;
 		cin >> run;
 	}
+
+	list.display();
 }

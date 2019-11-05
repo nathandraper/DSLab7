@@ -108,7 +108,7 @@ public:
 
 	void display() {
 
-		cout << "Part Number: " << partNumber << ", Description: " << description << ", Price: " << price;
+		cout << "Part Number: " << partNumber << ", Description: " << description << ", Price: " << price << endl;
 
 	}
 

@@ -1,8 +1,14 @@
 #ifndef LINKEDLIST_H
 #define LINKEDLIST_H
 
+#include <fstream>
+#include <string>
 #include "OutOfListRange.h"
 #include "EmptyList.h"
+
+using namespace std;
+
+string HEADER_FILENAME = "part_list_art.txt";
 
 template <typename T>
 struct Node {
@@ -168,6 +174,22 @@ public:
 		return this->length == num;
 	}
 
+	void display() {
+		string line;
+		Node<T>* curr = this->list;
+		ifstream header(HEADER_FILENAME);
+
+		getline(header, line);
+		while (!header.eof()) {
+			cout << line << endl; 
+			getline(header, line);
+		}
+
+		while (curr){
+			curr->data->display();
+			curr = curr->next;
+		}
+	}
 };
 
 #endif
